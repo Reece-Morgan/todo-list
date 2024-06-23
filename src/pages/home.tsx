@@ -1,13 +1,12 @@
 import styled from "styled-components";
+import Header from "../components/header";
 import AddToDo from "../components/add-todo";
 import ToDoList from "../components/todo-list";
 
 function HomePage() {
   return (
     <Wrapper>
-      <header>
-        <h1>To Do List</h1>
-      </header>
+      <Header />
       <main>
         <AddToDo />
         <ToDoList />
