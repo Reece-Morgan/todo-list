@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { addTodo } from "../store/to-dos/to-dos";
+import { useState } from "react";
 
 interface FormProps {
   todo: string;
@@ -10,13 +11,21 @@ interface FormProps {
 function AddTodo() {
   const dispatch = useDispatch();
   const { register, handleSubmit, reset } = useForm<FormProps>();
+  const [showError, setShowError] = useState<boolean>(false);
 
   const onSubmit = handleSubmit(async (data: FormProps) => {
-    if (!data.todo) return;
+    if (!data.todo) {
+      setShowError(true);
+      return;
+    }
 
     dispatch(addTodo(data.todo));
     reset();
   });
+
+  const clearError = () => {
+    if (showError) setShowError(false);
+  };
 
   return (
     <Wrapper>
@@ -26,8 +35,10 @@ function AddTodo() {
           type="text"
           id="todo"
           placeholder="Enter your next To Do item"
+          onFocus={() => clearError()}
           {...register("todo")}
         />
+        {showError && <Error>Please enter a To Do Item</Error>}
         <Button>Add ToDo</Button>
       </Form>
     </Wrapper>
@@ -76,4 +87,10 @@ const Button = styled.button`
   &:hover {
     background: linear-gradient(90deg, #f43232, #b15aeb);
   }
+`;
+
+const Error = styled.p`
+  color: #c31014;
+  font-weight: 700;
+  margin: 0;
 `;
