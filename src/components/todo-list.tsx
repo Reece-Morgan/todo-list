@@ -48,7 +48,9 @@ const NoToDos = styled.section``;
 
 const ToDos = styled.section``;
 
-const Title = styled.h2``;
+const Title = styled.h2`
+  color: #fd1d1d;
+`;
 
 const List = styled.ul``;
 
@@ -68,4 +70,11 @@ const Button = styled.button`
   height: 20px;
   margin: 0 20px;
   min-width: 140px;
+  cursor: pointer;border: 0;
+  background: linear-gradient(90deg, #fd1d1d, #a23fe3);
+  color: #fff;
+  cursor: pointer;
+  &:hover {
+    background: linear-gradient(90deg, #f43232, #b15aeb);
+  }
 `;

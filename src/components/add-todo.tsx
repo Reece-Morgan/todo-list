@@ -28,7 +28,7 @@ function AddTodo() {
           placeholder="Enter your next To Do item"
           {...register("todo")}
         />
-        <Button>Add</Button>
+        <Button>Add ToDo</Button>
       </Form>
     </Wrapper>
   );
@@ -41,7 +41,9 @@ const Wrapper = styled.section`
   margin: 0 auto;
 `;
 
-const Title = styled.h2``;
+const Title = styled.h2`
+  color: #fd1d1d;
+`;
 
 const Form = styled.form`
   width: 100%;
@@ -63,15 +65,15 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
-  width: 100px;
+  width: 200px;
   height: 50px;
-  border: 2px solid #054605;
-  background-color: #054605;
+  border-radius: 0.5rem;
+  border: 0;
+  background: linear-gradient(90deg, #fd1d1d, #a23fe3);
   color: #fff;
   font-size: 20px;
   cursor: pointer;
   &:hover {
-    background-color: #fff;
-    color: #054605;
+    background: linear-gradient(90deg, #f43232, #b15aeb);
   }
 `;
