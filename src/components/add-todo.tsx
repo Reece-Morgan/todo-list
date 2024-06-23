@@ -38,7 +38,7 @@ function AddTodo() {
           onFocus={() => clearError()}
           {...register("todo")}
         />
-        {showError && <Error>Please enter a To Do Item</Error>}
+        {showError && <Error>Invalid empty To Do Item</Error>}
         <Button>Add ToDo</Button>
       </Form>
     </Wrapper>
