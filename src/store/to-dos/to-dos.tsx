@@ -17,7 +17,7 @@ const TodosSlices = createSlice({
     },
     removeTodo: (state, action: PayloadAction<string>) => {
       state.todos = state.todos.filter(
-        (postcode: string) => postcode !== action.payload
+        (todo: string) => todo !== action.payload
       );
     },
   },

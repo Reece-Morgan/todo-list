@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { addTodo } from "../store/to-dos/to-dos";
 import { useState } from "react";
+import { useAppSelector } from "../store";
 
 interface FormProps {
   todo: string;
@@ -10,15 +11,24 @@ interface FormProps {
 
 function AddTodo() {
   const dispatch = useDispatch();
+  const { todos } = useAppSelector((state) => state.ToDos);
   const { register, handleSubmit, reset } = useForm<FormProps>();
   const [showError, setShowError] = useState<boolean>(false);
+  const [errorMsg, setErrorMsg] = useState<string>("");
 
   const onSubmit = handleSubmit(async (data: FormProps) => {
     if (!data.todo) {
+      setErrorMsg("Invalid empty To Do Item");
       setShowError(true);
       return;
     }
 
+    if (todos.findIndex((todo: string) => todo === data.todo) !== -1) {
+      setErrorMsg("To Do Item already exists");
+      setShowError(true);
+      return;
+    }
+    
     dispatch(addTodo(data.todo));
     reset();
   });
@@ -38,7 +48,7 @@ function AddTodo() {
           onFocus={() => clearError()}
           {...register("todo")}
         />
-        {showError && <Error>Invalid empty To Do Item</Error>}
+        {showError && <Error>{errorMsg}</Error>}
         <Button>Add ToDo</Button>
       </Form>
     </Wrapper>
